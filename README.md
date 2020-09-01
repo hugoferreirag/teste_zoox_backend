@@ -13,7 +13,11 @@ nodemon
 
 OBS: eu utilizei nodemon
 ```
-
+### Configuração dotEnv: Configurar .env colocando a porta que o sistema ira rodar e o link para o banco de dados mongo, exemplo:
+```
+PORT='NUMERO_DA_PORTA'
+DB='http://url_do_banco_de_dados/nome_do_banco'
+```
 
 ### Ferramentas utilizadas:
 ```
