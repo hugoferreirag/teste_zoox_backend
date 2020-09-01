@@ -56,7 +56,7 @@ const statesService = {
             }
             const existsState = await states.find({ initials: state.initials })
 
-            if (existsState.length) throw { msg: 'Estado ja conta no sistema', status: 400 }
+            if (existsState.length) throw { msg: 'Estado já existe no sistema', status: 400 }
 
             const data = await states.create(state)
             res.json(data).status(201);
@@ -93,7 +93,7 @@ const statesService = {
             }
             const existsState = await states.find({ name: state.name })
 
-            if (existsState.length) throw { msg: 'Estado ja conta no sistema', status: 400 }
+            if (existsState.length) throw { msg: 'Estado já existe no sistema', status: 400 }
 
             const data = await states.updateOne({ _id: id }, state, { multi: false })
             res.json(data).status(204);

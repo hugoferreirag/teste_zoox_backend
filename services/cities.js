@@ -48,7 +48,7 @@ const citiesService = {
 
             const existsCitie = await cities.find({ name: citie.name })
 
-            if (existsCitie.length) throw { msg: 'Cidade ja conta no sistema', status: 400 }
+            if (existsCitie.length) throw { msg: 'Cidade já existe no sistema', status: 400 }
 
 
             const data = await cities.create(citie)
@@ -84,7 +84,7 @@ const citiesService = {
 
             const existsCitie = await cities.find({ name: citie.name })
 
-            if (existsCitie.length) throw { msg: 'Cidade ja conta no sistema', status: 400 }
+            if (existsCitie.length) throw { msg: 'Cidade já existe no sistema', status: 400 }
             
             const data = await cities.updateOne({ _id: id }, citie, { multi: false })
             res.json(data).status(204);
