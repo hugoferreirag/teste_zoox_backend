@@ -1,5 +1,7 @@
 # Back End Teste ZOOX
 
+## Video explicativo de fluxo do sistema rodando sem erros: https://youtu.be/scCo69cq2iY
+
 ## Instalar dependencias
 ```
 npm i
