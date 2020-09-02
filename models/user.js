@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 require('../config/mongodb')
-const states = mongoose.model('states', {
-    name: {
+const user = mongoose.model('user', {
+    nickName: {
         type:String,
         required: true
     },
-    initials: {
+    password: {
         type:String,
-        required: true
+        required: true,
+        select: false
     },
     createdAt: {
         type: Date,
@@ -15,7 +16,8 @@ const states = mongoose.model('states', {
     },
     updatedAt: {
         type:Date,
+        required: true
     },
 })
 
-module.exports = states;
+module.exports = user;

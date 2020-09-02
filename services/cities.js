@@ -19,13 +19,16 @@ const citiesService = {
         }
     },
     filter: async (req, res) => {
-        const { name, initials } = req.body;
+        const { name, stateId } = req.body;
         try {
             if (name) {
-                const data = await cities.find({ name: methods.capitalize(name) })
+                const data = await cities.find({ name: { $regex: new RegExp(name), $options: 'i' } })
                 res.json(data).status(200);
             }
-            else {
+            else if (stateId){
+                const data = await cities.find({ stateId: stateId })
+                res.json(data).status(200);
+            } else {
                 const data = await cities.find()
                 res.json(data).status(200);
             }
@@ -46,9 +49,9 @@ const citiesService = {
                 updatedAt: new Date(),
             }
 
-            const existsCitie = await cities.find({ name: citie.name })
+            const existsCitie = await cities.findOne({ name: citie.name })
 
-            if (existsCitie.length) throw { msg: 'Cidade já existe no sistema', status: 400 }
+            if (existsCitie) throw { msg: 'Cidade já existe no sistema', status: 400 }
 
 
             const data = await cities.create(citie)
@@ -82,9 +85,9 @@ const citiesService = {
                 updatedAt: new Date(),
             }
 
-            const existsCitie = await cities.find({ name: citie.name })
+            const existsCitie = await cities.findOne({ name: citie.name })
 
-            if (existsCitie.length) throw { msg: 'Cidade já existe no sistema', status: 400 }
+            if (existsCitie) throw { msg: 'Cidade já existe no sistema', status: 400 }
             
             const data = await cities.updateOne({ _id: id }, citie, { multi: false })
             res.json(data).status(204);

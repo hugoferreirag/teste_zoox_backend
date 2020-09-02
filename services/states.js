@@ -28,11 +28,11 @@ const statesService = {
         const { name, initials } = req.body;
         try {
             if (name) {
-                const data = await states.find({ name: methods.capitalize(name) })
+                const data = await states.find({ name: { $regex: new RegExp(name), $options: 'i' }})
                 res.json(data).status(200);
             }
             else if (initials) {
-                const data = await states.find({ initials: initials.toString().toUpperCase() });
+                const data = await states.find({ initials: { $regex: new RegExp(initials), $options: 'i' } });
                 res.json(data).status(200);
             }
             else {
@@ -54,9 +54,9 @@ const statesService = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             }
-            const existsState = await states.find({ initials: state.initials })
+            const existsState = await states.findOne({ initials: state.initials })
 
-            if (existsState.length) throw { msg: 'Estado já existe no sistema', status: 400 }
+            if (existsState) throw { msg: 'Estado já existe no sistema', status: 400 }
 
             const data = await states.create(state)
             res.json(data).status(201);
@@ -91,9 +91,9 @@ const statesService = {
                 initials: payload.initials.toString().toUpperCase(),
                 updatedAt: new Date(),
             }
-            const existsState = await states.find({ name: state.name })
+            const existsState = await states.findOne({ name: state.name })
 
-            if (existsState.length) throw { msg: 'Estado já existe no sistema', status: 400 }
+            if (existsState) throw { msg: 'Estado já existe no sistema', status: 400 }
 
             const data = await states.updateOne({ _id: id }, state, { multi: false })
             res.json(data).status(204);
