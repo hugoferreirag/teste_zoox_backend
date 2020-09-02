@@ -147,10 +147,21 @@ page: number
 ```
 METHOD: POST
 url: http://{{base_url}}/cities/filter
+```
+1 opção de filtro
+```
 REQUEST BODY 
 {
 name: string
 }
+```
+2 opção de filtro
+```
+REQUEST BODY 
+{
+stateId: string
+}
+
 ```
 ##### Endpoint para inserir cidades
 ```
