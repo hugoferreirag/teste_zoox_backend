@@ -1,6 +1,6 @@
 const express = require('express');
 const routers = express.Router();
-const statesService = require('../services/states')
+const statesService = require('../services/clients')
 
 routers.post('/get', (req,res) => {
     statesService.getAll(req,res)

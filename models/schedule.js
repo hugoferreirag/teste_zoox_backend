@@ -2,20 +2,27 @@ const mongoose = require('mongoose');
 require('../config/mongodb');
 
 const schema = new mongoose.Schema({
-  name: {
+  clientId: {
     type: String,
     required: true,
   },
-  email: {
+  testId: {
     type: String,
     required: true,
   },
-  password: {
+  paymentId: {
     type: String,
     required: true,
-    select: false,
   },
+  cpf: {
+    type: String,
+    required: true,
+  },
+  testDates: {
+      type: Array,
+      required: true
+  }
 }, { timestamps: true });
-const user = mongoose.model('user', schema);
+const schedule = mongoose.model('schedule', schema);
 
-module.exports = user;
+module.exports = schedule;

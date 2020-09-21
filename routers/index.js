@@ -1,5 +1,5 @@
-const stateRouters = require('./states');
-const citiesRouters = require('./cities');
+const clientsRouters = require('./clients');
+const scheduleRouters = require('./schedule');
 const userRouters = require('./user');
 const authRouter = require('./auth');
 const express = require('express');
@@ -10,8 +10,8 @@ routers.use('/user', userRouters);
 routers.use('/auth', authRouter);
 // . . . Rotas abaixo necessitam de authenticação . . .
 routers.use(authMiddleware);
-routers.use('/states', stateRouters);
-routers.use('/cities', citiesRouters);
+routers.use('/clients', clientsRouters);
+routers.use('/schedule', scheduleRouters);
 
 
 module.exports = routers
