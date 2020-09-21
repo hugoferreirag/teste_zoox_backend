@@ -63,7 +63,7 @@ const scheduleService = {
             if (!payload.clientId || !payload.testId || !payload.paymentId || !payload.testDates.length) throw { msg: 'Dados inválidos', status: 400 };
 
 
-            const data = await schedule.create(schedule)
+            const data = await schedule.create(payload)
             res.json(data).status(201);
 
         } catch (error) {
