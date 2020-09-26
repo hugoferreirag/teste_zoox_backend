@@ -11,21 +11,19 @@ const userService = {
     create: async (req, res) => {
         const payload = req.body;
         try {
-            if (!payload.nickName || !payload.password) throw { msg: 'Dados inválidos', status: 400 }
+            if (!payload.email || !payload.password) throw { msg: 'Dados inválidos', status: 400 }
 
             const newUser = {
-                nickName: payload.nickName,
+                email: payload.email,
                 password: await encryptPassword(payload.password),
-                createdAt: new Date(),
-                updatedAt: new Date(),
             }
 
-            const existsUser = await user.findOne({ nickName: newUser.nickName })
+            const existsUser = await user.findOne({ email: newUser.email })
             if (existsUser) throw { msg: 'Usuário já existe no sistema', status: 400 }
 
             const data = await user.create(newUser)
 
-            res.json({items: {nickName: data.nickName, msg: 'Criado com sucesso'}}).status(201);
+            res.json({items: {email: data.email, msg: 'Criado com sucesso'}}).status(201);
 
         } catch (error) {
             if (error.status) res.status(error.status).json(error.msg)
